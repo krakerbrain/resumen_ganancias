@@ -18,15 +18,17 @@ btn.addEventListener("click", (e) => {
   opes.forEach((element, i) => {
     console.log(element, i);
     const locaciones = `
+<div class="d-flex align-items-end mb-2">
+      <label class = "pr-2" id="${element}" for="select${i + 1}">${element}</label>
 
-      <label for="">${element}</label>
-      <select class="form-control" id="select${i + 1}">
-      <option value="${element}">Viña del Mar</option>
-      <option value="${element}">Valparaiso</option>
-      <option value="${element}">Villa Alemana</option>
-      <option value="${element}">Quilpue</option>
-      <option value="${element}">Concon</option>
+      <select class="form-control" id="select${i + 1}" onchange="showSelected(select${i + 1}, ${element})">
+      <option value="Viña del Mar">Viña del Mar</option>
+      <option value="Valparaiso">Valparaiso</option>
+      <option value="Villa Alemana">Villa Alemana</option>
+      <option value="Quilpue">Quilpue</option>
+      <option value="Concon">Concon</option>
     </select>
+    </div>
 
         `;
     ubicacion.innerHTML += locaciones;
@@ -103,13 +105,33 @@ const obtenerOP = (boosmapOP) => {
   return opListas;
 };
 
+// function getComboA(selectObject) {
+//   var value = selectObject.value;
+//   console.log(value);
+// }
+
+const opYDestino = [];
+
+console.log(opYDestino);
+
+const showSelected = (id, idLabel) => {
+  const label = document.getElementById(idLabel);
+
+  const opruta = idLabel;
+  let ruta = {
+    [opruta]: id.value,
+  };
+  opYDestino.push(ruta);
+
+  id.style.display = "none";
+  label.innerHTML = `${idLabel} ${id.value} `;
+  label.classList.remove("pr-2");
+  label.classList += " opConUbicacion";
+  console.log(id.value, idLabel);
+};
+
 const btnEnviar = document.getElementById("btnEnviar");
 
 btnEnviar.addEventListener("click", (e) => {
   e.preventDefault();
-
-  const selectOp = document.querySelector("#select1"); //.selectedOptions[0].value;
-  //const locacion = document.querySelector("#select1").selectedOptions[0].text;
-
-  console.log(selectOp);
 });
