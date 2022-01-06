@@ -10,10 +10,11 @@ create table registro (
     boosmapOP int
 );
 
-create table rutas ( 
-    id_rutas int,
+create table boosmap ( 
+    id_rutas serial primary key,
     fecha timestamp,
-    numero_op int primary key,
+    numero_op int unique,
     direccion varchar(25),
-    constraint fk_registro foreign key(id_rutas) references registro(id)
+    monto int
+    
 );
